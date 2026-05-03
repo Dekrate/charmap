@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Character Map</value>
+  </data>
+  <data name="FontLabel" xml:space="preserve">
+    <value>Font:</value>
+  </data>
+  <data name="HelpButton" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="CopyLabel" xml:space="preserve">
+    <value>Characters to copy:</value>
+  </data>
+  <data name="SelectButton" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="CopyButton" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="AdvancedView" xml:space="preserve">
+    <value>Advanced view</value>
+  </data>
+  <data name="HelpTitle" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>Select a font and click a character to add it to the copy field. Use the Copy button to copy characters to the clipboard.</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+</root>
