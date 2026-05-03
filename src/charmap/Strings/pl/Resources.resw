@@ -30,4 +30,94 @@
   <data name="CloseButton" xml:space="preserve">
     <value>Zamknij</value>
   </data>
+  <data name="CharacterSetLabel" xml:space="preserve">
+    <value>Zestaw znaków:</value>
+  </data>
+  <data name="GoToUnicodeLabel" xml:space="preserve">
+    <value>Przejdź do Unicode:</value>
+  </data>
+  <data name="GoToUnicodeButton" xml:space="preserve">
+    <value>Przejdź</value>
+  </data>
+  <data name="GroupByLabel" xml:space="preserve">
+    <value>Grupa według:</value>
+  </data>
+  <data name="SearchLabel" xml:space="preserve">
+    <value>Wyszukaj:</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Wyszukaj</value>
+  </data>
+  <data name="CharacterSetUnicode" xml:space="preserve">
+    <value>Unicode</value>
+  </data>
+  <data name="CharSetArabic" xml:space="preserve">
+    <value>Arabski</value>
+  </data>
+  <data name="CharSetBaltic" xml:space="preserve">
+    <value>Bałtycki</value>
+  </data>
+  <data name="CharSetCyrillic" xml:space="preserve">
+    <value>Cyrylica</value>
+  </data>
+  <data name="CharSetCyrillic2" xml:space="preserve">
+    <value>Cyrylica II</value>
+  </data>
+  <data name="CharSetCentralEurope" xml:space="preserve">
+    <value>Europa Środkowa</value>
+  </data>
+  <data name="CharSetWesternEurope" xml:space="preserve">
+    <value>Europa Zachodnia</value>
+  </data>
+  <data name="CharSetGreek" xml:space="preserve">
+    <value>Grecki</value>
+  </data>
+  <data name="CharSetHebrew" xml:space="preserve">
+    <value>Hebrajski</value>
+  </data>
+  <data name="CharSetUnitedStates" xml:space="preserve">
+    <value>Stany Zjednoczone</value>
+  </data>
+  <data name="CharSetTurkish" xml:space="preserve">
+    <value>Turecki</value>
+  </data>
+  <data name="CharSetChineseTraditional" xml:space="preserve">
+    <value>Chiński tradycyjny</value>
+  </data>
+  <data name="CharSetChineseSimplified" xml:space="preserve">
+    <value>Chiński uproszczony</value>
+  </data>
+  <data name="CharSetJapanese" xml:space="preserve">
+    <value>Japoński</value>
+  </data>
+  <data name="CharSetKorean" xml:space="preserve">
+    <value>Koreański</value>
+  </data>
+  <data name="CharSetThai" xml:space="preserve">
+    <value>Tajski</value>
+  </data>
+  <data name="CharSetVietnamese" xml:space="preserve">
+    <value>Wietnamski</value>
+  </data>
+  <data name="CharSetWestern" xml:space="preserve">
+    <value>Zachodni</value>
+  </data>
+  <data name="GroupAll" xml:space="preserve">
+    <value>Wszystko</value>
+  </data>
+  <data name="GroupChineseTraditionalBopomofo" xml:space="preserve">
+    <value>Chiński tradycyjny wg Bopomofo</value>
+  </data>
+  <data name="GroupChineseSimplifiedPinyin" xml:space="preserve">
+    <value>Chiński uproszczony wg PinYin</value>
+  </data>
+  <data name="GroupIdeogramsRadicals" xml:space="preserve">
+    <value>Ideogramy wg Radicals</value>
+  </data>
+  <data name="GroupKoreanHanjaHangul" xml:space="preserve">
+    <value>Koreański Hanja wg Hangul</value>
+  </data>
+  <data name="GroupUnicodeSubset" xml:space="preserve">
+    <value>Podzakres Unicode</value>
+  </data>
 </root>

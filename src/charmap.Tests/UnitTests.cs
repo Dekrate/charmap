@@ -126,6 +126,64 @@ namespace charmap.Tests
     }
 
     [TestClass]
+    public class UnicodeHelperTests
+    {
+        [TestMethod]
+        public void GetUnicodeBlockName_BasicLatin_ReturnsBasicLatin()
+        {
+            Assert.AreEqual("Basic Latin", UnicodeHelper.GetUnicodeBlockName(0x41));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_Greek_ReturnsGreekAndCoptic()
+        {
+            Assert.AreEqual("Greek and Coptic", UnicodeHelper.GetUnicodeBlockName(0x3A0));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_Cyrillic_ReturnsCyrillic()
+        {
+            Assert.AreEqual("Cyrillic", UnicodeHelper.GetUnicodeBlockName(0x410));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_Armenian_ReturnsArmenian()
+        {
+            Assert.AreEqual("Armenian", UnicodeHelper.GetUnicodeBlockName(0x531));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_Hebrew_ReturnsHebrew()
+        {
+            Assert.AreEqual("Hebrew", UnicodeHelper.GetUnicodeBlockName(0x5D0));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_Arabic_ReturnsArabic()
+        {
+            Assert.AreEqual("Arabic", UnicodeHelper.GetUnicodeBlockName(0x625));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_HangulSyllables_ReturnsHangulSyllables()
+        {
+            Assert.AreEqual("Hangul Syllables", UnicodeHelper.GetUnicodeBlockName(0xAC00));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_Unknown_ReturnsUnknown()
+        {
+            Assert.AreEqual("Unknown Block", UnicodeHelper.GetUnicodeBlockName(0x110000));
+        }
+
+        [TestMethod]
+        public void GetUnicodeBlockName_CJKUnifiedIdeographs_ReturnsCJKUnifiedIdeographs()
+        {
+            Assert.AreEqual("CJK Unified Ideographs", UnicodeHelper.GetUnicodeBlockName(0x4E00));
+        }
+    }
+
+    [TestClass]
     public class AppLoggerTests
     {
         [TestMethod]

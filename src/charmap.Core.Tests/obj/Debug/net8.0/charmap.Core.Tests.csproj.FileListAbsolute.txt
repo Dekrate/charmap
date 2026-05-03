@@ -166,3 +166,4 @@ D:\projekty edukacyjne\charmap\src\charmap.Core.Tests\obj\Debug\net8.0\refint\ch
 D:\projekty edukacyjne\charmap\src\charmap.Core.Tests\obj\Debug\net8.0\charmap.Core.Tests.pdb
 D:\projekty edukacyjne\charmap\src\charmap.Core.Tests\obj\Debug\net8.0\charmap.Core.Tests.genruntimeconfig.cache
 D:\projekty edukacyjne\charmap\src\charmap.Core.Tests\obj\Debug\net8.0\ref\charmap.Core.Tests.dll
+D:\projekty edukacyjne\charmap\src\charmap.Core.Tests\obj\Debug\net8.0\charmap.Core.Tests.sourcelink.json

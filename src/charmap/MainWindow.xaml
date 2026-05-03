@@ -119,8 +119,68 @@
             <CheckBox x:Name="AdvancedViewCheckBox" x:FieldModifier="public"
                       Grid.Row="3"
                       IsChecked="False"
-                      IsEnabled="False"
-                      ToolTipService.ToolTip="Coming soon"/>
+                      Checked="AdvancedViewCheckBox_Checked"
+                      Unchecked="AdvancedViewCheckBox_Unchecked"/>
+
+            <!-- Advanced panel -->
+            <Grid x:Name="AdvancedPanel" x:FieldModifier="public" Grid.Row="4" Visibility="Collapsed" Margin="0,8,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Character set -->
+                <Grid Grid.Row="0" Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="CharacterSetLabel" x:FieldModifier="public" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <ComboBox x:Name="CharacterSetComboBox" x:FieldModifier="public" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" SelectionChanged="CharacterSetComboBox_SelectionChanged"/>
+                </Grid>
+
+                <!-- Go to Unicode -->
+                <Grid Grid.Row="1" Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="GoToUnicodeLabel" x:FieldModifier="public" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock x:Name="GoToUnicodePrefix" x:FieldModifier="public" Grid.Column="1" VerticalAlignment="Center" Text="U+" Margin="0,0,4,0"/>
+                    <TextBox x:Name="GoToUnicodeTextBox" x:FieldModifier="public" Grid.Column="2" VerticalAlignment="Center" Width="80" MaxLength="6"/>
+                    <Button x:Name="GoToUnicodeButton" x:FieldModifier="public" Grid.Column="3" Margin="8,0,0,0" VerticalAlignment="Center" Click="GoToUnicodeButton_Click"/>
+                </Grid>
+
+                <!-- Group by -->
+                <Grid Grid.Row="2" Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="GroupByLabel" x:FieldModifier="public" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <ComboBox x:Name="GroupByComboBox" x:FieldModifier="public" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" SelectionChanged="GroupByComboBox_SelectionChanged"/>
+                </Grid>
+
+                <!-- Search -->
+                <Grid Grid.Row="3" Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="SearchLabel" x:FieldModifier="public" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="SearchTextBox" x:FieldModifier="public" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Button x:Name="SearchButton" x:FieldModifier="public" Grid.Column="2" Margin="8,0,0,0" VerticalAlignment="Center" Click="SearchButton_Click"/>
+                </Grid>
+
+                <!-- Selected character -->
+                <TextBlock x:Name="SelectedCharacterTextBlock" x:FieldModifier="public" Grid.Row="4" Margin="0,4,0,0" TextWrapping="Wrap"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

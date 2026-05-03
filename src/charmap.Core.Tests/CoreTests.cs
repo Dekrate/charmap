@@ -219,7 +219,19 @@ namespace charmap.Core.Tests
                 "x:Name=\"CopyTextBox\"",
                 "x:Name=\"SelectButton\"",
                 "x:Name=\"CopyButton\"",
-                "x:Name=\"AdvancedViewCheckBox\""
+                "x:Name=\"AdvancedViewCheckBox\"",
+                "x:Name=\"AdvancedPanel\"",
+                "x:Name=\"CharacterSetLabel\"",
+                "x:Name=\"CharacterSetComboBox\"",
+                "x:Name=\"GoToUnicodeLabel\"",
+                "x:Name=\"GoToUnicodeTextBox\"",
+                "x:Name=\"GoToUnicodeButton\"",
+                "x:Name=\"GroupByLabel\"",
+                "x:Name=\"GroupByComboBox\"",
+                "x:Name=\"SearchLabel\"",
+                "x:Name=\"SearchTextBox\"",
+                "x:Name=\"SearchButton\"",
+                "x:Name=\"SelectedCharacterTextBlock\""
             };
 
             foreach (var r in required)
@@ -247,10 +259,10 @@ namespace charmap.Core.Tests
         }
 
         [TestMethod]
-        public void MainWindowXaml_AdvancedView_IsDisabled()
+        public void MainWindowXaml_AdvancedView_IsEnabled()
         {
-            Assert.IsTrue(_xamlContent.Contains("x:Name=\"AdvancedViewCheckBox\"") && _xamlContent.Contains("IsEnabled=\"False\""),
-                "AdvancedViewCheckBox should be disabled as per requirements");
+            Assert.IsTrue(_xamlContent.Contains("x:Name=\"AdvancedViewCheckBox\"") && !_xamlContent.Contains("IsEnabled=\"False\""),
+                "AdvancedViewCheckBox should be enabled");
         }
 
         [TestMethod]
@@ -360,7 +372,10 @@ namespace charmap.Core.Tests
         {
             var namedControls = new[] { "AppTitleBar", "TitleTextBlock", "FontLabel", "FontComboBox",
                                         "HelpButton", "CharacterGridView", "CopyLabel", "CopyTextBox",
-                                        "SelectButton", "CopyButton", "AdvancedViewCheckBox" };
+                                        "SelectButton", "CopyButton", "AdvancedViewCheckBox", "AdvancedPanel",
+                                        "CharacterSetLabel", "CharacterSetComboBox", "GoToUnicodeLabel", "GoToUnicodeTextBox",
+                                        "GoToUnicodeButton", "GroupByLabel", "GroupByComboBox", "SearchLabel", "SearchTextBox",
+                                        "SearchButton", "SelectedCharacterTextBlock" };
             foreach (var ctrl in namedControls)
             {
                 var nameAttr = $"x:Name=\"{ctrl}\"";

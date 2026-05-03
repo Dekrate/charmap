@@ -10,7 +10,7 @@
         "dependencies": {
           "MSTest.TestAdapter": "3.3.1",
           "MSTest.TestFramework": "3.3.1",
-          "Microsoft.TestPlatform.TestHost": "17.9.0",
+          "Microsoft.NET.Test.Sdk": "17.9.0",
           "Microsoft.WindowsAppSDK": "1.5.240428000",
           "charmap": "1.0.0",
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0",
@@ -40,6 +40,14 @@
           }
         }
       },
+      "Microsoft.CodeCoverage/17.9.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "17.900.724.7204"
+          }
+        }
+      },
       "Microsoft.Graphics.Win2D/1.2.0": {
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.5.240428000"
@@ -66,6 +74,12 @@
             "assetType": "native",
             "fileVersion": "1.2.0.0"
           }
+        }
+      },
+      "Microsoft.NET.Test.Sdk/17.9.0": {
+        "dependencies": {
+          "Microsoft.CodeCoverage": "17.9.0",
+          "Microsoft.TestPlatform.TestHost": "17.9.0"
         }
       },
       "Microsoft.Testing.Extensions.Telemetry/1.1.0": {
@@ -394,15 +408,7 @@
             "assemblyVersion": "15.0.0.0",
             "fileVersion": "17.900.24.10602"
           },
-          "lib/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll": {
-            "assemblyVersion": "15.0.0.0",
-            "fileVersion": "17.900.24.10602"
-          },
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CrossPlatEngine.dll": {
-            "assemblyVersion": "15.0.0.0",
-            "fileVersion": "17.900.24.10602"
-          },
-          "lib/netcoreapp3.1/Microsoft.TestPlatform.PlatformAbstractions.dll": {
             "assemblyVersion": "15.0.0.0",
             "fileVersion": "17.900.24.10602"
           },
@@ -411,10 +417,6 @@
             "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.Common.dll": {
-            "assemblyVersion": "15.0.0.0",
-            "fileVersion": "17.900.24.10602"
-          },
-          "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {
             "assemblyVersion": "15.0.0.0",
             "fileVersion": "17.900.24.10602"
           },
@@ -742,12 +744,26 @@
       "path": "microsoft.applicationinsights/2.22.0",
       "hashPath": "microsoft.applicationinsights.2.22.0.nupkg.sha512"
     },
+    "Microsoft.CodeCoverage/17.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RGD37ZSrratfScYXm7M0HjvxMxZyWZL4jm+XgMZbkIY1UPgjUpbNA/t+WTGj/rC/0Hm9A3IrH3ywbKZkOCnoZA==",
+      "path": "microsoft.codecoverage/17.9.0",
+      "hashPath": "microsoft.codecoverage.17.9.0.nupkg.sha512"
+    },
     "Microsoft.Graphics.Win2D/1.2.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-7bAo8ObjCy/br0eW0nONRfVKehJu5aDe/KQekWeNXslwTOO2rhrIfWaVGepsXyVqmqwHoLJ31g1HsT7FLdBCoQ==",
       "path": "microsoft.graphics.win2d/1.2.0",
       "hashPath": "microsoft.graphics.win2d.1.2.0.nupkg.sha512"
+    },
+    "Microsoft.NET.Test.Sdk/17.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7GUNAUbJYn644jzwLm5BD3a2p9C1dmP8Hr6fDPDxgItQk9hBs1Svdxzz07KQ/UphMSmgza9AbijBJGmw5D658A==",
+      "path": "microsoft.net.test.sdk/17.9.0",
+      "hashPath": "microsoft.net.test.sdk.17.9.0.nupkg.sha512"
     },
     "Microsoft.Testing.Extensions.Telemetry/1.1.0": {
       "type": "package",

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Composition.SystemBackdrops;
@@ -61,9 +62,93 @@ namespace charmap.Tests
         }
 
         [TestMethod]
-        public void AdvancedViewCheckBox_IsDisabled()
+        public void AdvancedViewCheckBox_IsEnabled()
         {
-            Assert.IsFalse(_window.AdvancedViewCheckBox.IsEnabled, "Advanced view should be disabled per requirements");
+            Assert.IsTrue(_window.AdvancedViewCheckBox.IsEnabled, "Advanced view should be enabled");
+        }
+
+        [TestMethod]
+        public void AdvancedPanel_Exists()
+        {
+            Assert.IsNotNull(_window.AdvancedPanel);
+        }
+
+        [TestMethod]
+        public void AdvancedPanel_IsInitiallyCollapsed()
+        {
+            Assert.AreEqual(Visibility.Collapsed, _window.AdvancedPanel.Visibility);
+        }
+
+        [TestMethod]
+        public void CharacterSetComboBox_HasItems()
+        {
+            Assert.IsTrue(_window.CharacterSetComboBox.Items.Count > 0, "Character set combo should have items");
+        }
+
+        [TestMethod]
+        public void GroupByComboBox_HasItems()
+        {
+            Assert.IsTrue(_window.GroupByComboBox.Items.Count > 0, "Group by combo should have items");
+        }
+
+        [TestMethod]
+        public void GoToUnicodeTextBox_Exists()
+        {
+            Assert.IsNotNull(_window.GoToUnicodeTextBox);
+        }
+
+        [TestMethod]
+        public void SearchTextBox_Exists()
+        {
+            Assert.IsNotNull(_window.SearchTextBox);
+        }
+
+        [TestMethod]
+        public void SearchButton_Exists()
+        {
+            Assert.IsNotNull(_window.SearchButton);
+        }
+
+        [TestMethod]
+        public void GoToUnicodeButton_Exists()
+        {
+            Assert.IsNotNull(_window.GoToUnicodeButton);
+        }
+
+        [TestMethod]
+        public void SelectedCharacterTextBlock_Exists()
+        {
+            Assert.IsNotNull(_window.SelectedCharacterTextBlock);
+        }
+
+        [TestMethod]
+        public void CharacterSetComboBox_SelectionChanged_DoesNotThrow()
+        {
+            _window.CharacterSetComboBox_SelectionChanged(null!, null!);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GroupByComboBox_SelectionChanged_DoesNotThrow()
+        {
+            _window.GroupByComboBox_SelectionChanged(null!, null!);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void SearchButton_Click_EmptyQuery_DoesNotThrow()
+        {
+            _window.SearchTextBox.Text = "";
+            _window.SearchButton_Click(null!, null!);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GoToUnicodeButton_Click_EmptyInput_DoesNotThrow()
+        {
+            _window.GoToUnicodeTextBox.Text = "";
+            _window.GoToUnicodeButton_Click(null!, null!);
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -262,6 +347,33 @@ namespace charmap.Tests
         public void CharacterGridView_IsItemClickEnabled_IsTrue()
         {
             Assert.IsTrue(_window.CharacterGridView.IsItemClickEnabled, "ItemClick should be enabled");
+        }
+
+        [TestMethod]
+        public void SelectedCharacterTextBlock_InitiallyEmpty()
+        {
+            Assert.IsTrue(string.IsNullOrEmpty(_window.SelectedCharacterTextBlock.Text), "Selected character should be empty initially");
+        }
+
+        [TestMethod]
+        public void UpdateSelectedCharacterInfo_UpdatesTextBlock()
+        {
+            var item = new CharacterItem { Character = "!", CodePoint = 0x21 };
+            _window.UpdateSelectedCharacterInfo(item);
+            var text = _window.SelectedCharacterTextBlock.Text;
+            Assert.IsTrue(text.Contains("U+0021"), "Should contain Unicode code point");
+            Assert.IsTrue(text.Contains("Basic Latin"), "Should contain block name");
+            Assert.IsTrue(text.Contains("!"), "Should contain the character itself");
+        }
+
+        [TestMethod]
+        public void UpdateSelectedCharacterInfo_GreekCharacter_Works()
+        {
+            var item = new CharacterItem { Character = "\u03A0", CodePoint = 0x3A0 };
+            _window.UpdateSelectedCharacterInfo(item);
+            var text = _window.SelectedCharacterTextBlock.Text;
+            Assert.IsTrue(text.Contains("U+03A0"), "Should contain Greek code point");
+            Assert.IsTrue(text.Contains("Greek and Coptic"), "Should contain Greek block");
         }
     }
 }
