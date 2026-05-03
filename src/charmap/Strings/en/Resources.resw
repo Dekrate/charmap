@@ -6,6 +6,9 @@
   <data name="FontLabel" xml:space="preserve">
     <value>Font:</value>
   </data>
+  <data name="AboutButton" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="HelpButton" xml:space="preserve">
     <value>Help</value>
   </data>
@@ -20,6 +23,18 @@
   </data>
   <data name="AdvancedView" xml:space="preserve">
     <value>Advanced view</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AboutAppName" xml:space="preserve">
+    <value>Character Map</value>
+  </data>
+  <data name="AboutAuthor" xml:space="preserve">
+    <value>Author: Dekrate</value>
+  </data>
+  <data name="AboutCloseButton" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="HelpTitle" xml:space="preserve">
     <value>Help</value>

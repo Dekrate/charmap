@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("charmap.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0621ac95d3bc186ea5c75a69945973a7e06901c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f757bf20754d6f149a52e55818bc770061bf63a")]
 [assembly: System.Reflection.AssemblyProductAttribute("charmap.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("charmap.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

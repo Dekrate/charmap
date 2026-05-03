@@ -539,6 +539,43 @@ namespace charmap
             }
         }
 
+        internal void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var stack = new StackPanel { Spacing = 8 };
+                stack.Children.Add(new TextBlock
+                {
+                    Text = GetString("AboutAppName", "Tablica znak\u00F3w"),
+                    FontSize = 18,
+                    FontWeight = Microsoft.UI.Text.FontWeights.SemiBold
+                });
+                stack.Children.Add(new TextBlock
+                {
+                    Text = GetString("AboutAuthor", "Autor: Dekrate")
+                });
+                stack.Children.Add(new HyperlinkButton
+                {
+                    Content = "github.com/Dekrate/charmap",
+                    NavigateUri = new Uri("https://github.com/Dekrate/charmap")
+                });
+
+                var dialog = new ContentDialog
+                {
+                    Title = GetString("AboutTitle", "O programie"),
+                    Content = stack,
+                    CloseButtonText = GetString("AboutCloseButton", "Zamknij"),
+                    XamlRoot = this.Content.XamlRoot
+                };
+                _ = dialog.ShowAsync();
+                AppLogger.Info("About dialog opened");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error("AboutButton_Click failed", ex);
+            }
+        }
+
         internal void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -564,6 +601,7 @@ namespace charmap
             try
             {
                 FontLabel.Text = GetString("FontLabel", "Czcionka:");
+                AboutButton.Content = GetString("AboutButton", "O programie");
                 HelpButton.Content = GetString("HelpButton", "Pomoc");
                 CopyLabel.Text = GetString("CopyLabel", "Znaki do skopiowania:");
                 SelectButton.Content = GetString("SelectButton", "Wybierz");

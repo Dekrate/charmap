@@ -6,6 +6,9 @@
   <data name="FontLabel" xml:space="preserve">
     <value>Czcionka:</value>
   </data>
+  <data name="AboutButton" xml:space="preserve">
+    <value>O programie</value>
+  </data>
   <data name="HelpButton" xml:space="preserve">
     <value>Pomoc</value>
   </data>
@@ -20,6 +23,18 @@
   </data>
   <data name="AdvancedView" xml:space="preserve">
     <value>Widok zaawansowany</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>O programie</value>
+  </data>
+  <data name="AboutAppName" xml:space="preserve">
+    <value>Tablica znaków</value>
+  </data>
+  <data name="AboutAuthor" xml:space="preserve">
+    <value>Autor: Dekrate</value>
+  </data>
+  <data name="AboutCloseButton" xml:space="preserve">
+    <value>Zamknij</value>
   </data>
   <data name="HelpTitle" xml:space="preserve">
     <value>Pomoc</value>

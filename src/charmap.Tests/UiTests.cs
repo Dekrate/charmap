@@ -37,6 +37,7 @@ namespace charmap.Tests
         public void Window_HasAllControls()
         {
             Assert.IsNotNull(_window.FontComboBox);
+            Assert.IsNotNull(_window.AboutButton);
             Assert.IsNotNull(_window.HelpButton);
             Assert.IsNotNull(_window.CharacterGridView);
             Assert.IsNotNull(_window.CopyTextBox);
@@ -211,6 +212,13 @@ namespace charmap.Tests
         }
 
         [TestMethod]
+        public void AboutButton_Click_DoesNotThrow()
+        {
+            _window.AboutButton_Click(null!, null!);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
         public void HelpButton_Click_DoesNotThrow()
         {
             // May fail to show dialog without active XamlRoot, but handler has try-catch
@@ -311,6 +319,13 @@ namespace charmap.Tests
         public void CopyLabel_Text_IsNotEmpty()
         {
             Assert.IsFalse(string.IsNullOrEmpty(_window.CopyLabel.Text), "Copy label should be localized");
+        }
+
+        [TestMethod]
+        public void AboutButton_Content_IsNotEmpty()
+        {
+            Assert.IsNotNull(_window.AboutButton.Content, "About button should have content");
+            Assert.IsFalse(string.IsNullOrEmpty(_window.AboutButton.Content.ToString()), "About button content should not be empty");
         }
 
         [TestMethod]
