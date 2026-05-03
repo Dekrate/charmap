@@ -135,4 +135,34 @@
   <data name="GroupUnicodeSubset" xml:space="preserve">
     <value>Podzakres Unicode</value>
   </data>
+  <data name="SettingsButton" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="ThemeLabel" xml:space="preserve">
+    <value>Motyw:</value>
+  </data>
+  <data name="ThemeAuto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Jasny</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Ciemny</value>
+  </data>
+  <data name="BackdropLabel" xml:space="preserve">
+    <value>Tło:</value>
+  </data>
+  <data name="BackdropMica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="BackdropMicaAlt" xml:space="preserve">
+    <value>Mica Alt</value>
+  </data>
+  <data name="BackdropTransparent" xml:space="preserve">
+    <value>Przezroczysty</value>
+  </data>
 </root>

@@ -29,7 +29,7 @@ namespace charmap
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 this.InitializeComponent();
                 SetupTitleBar();
-                SetupMica();
+                LoadSettings();
                 LoadFonts();
                 SetupLocalization();
                 SetupAdvancedPanel();
@@ -61,18 +61,87 @@ namespace charmap
             }
         }
 
-        private void SetupMica()
+        private void LoadSettings()
         {
             try
             {
-                SystemBackdrop = new MicaBackdrop { Kind = MicaKind.BaseAlt };
-                AppLogger.Info("Mica Alt backdrop applied");
+                var theme = GetSetting("Theme", "Auto");
+                var backdrop = GetSetting("Backdrop", "MicaAlt");
+                ApplyTheme(theme);
+                ApplyBackdrop(backdrop);
+                AppLogger.Info($"Settings loaded: Theme={theme}, Backdrop={backdrop}");
             }
             catch (Exception ex)
             {
-                AppLogger.Error("SetupMica failed", ex);
-                throw;
+                AppLogger.Error("LoadSettings failed", ex);
             }
+        }
+
+        private void ApplyTheme(string theme)
+        {
+            try
+            {
+                var elementTheme = theme switch
+                {
+                    "Light" => ElementTheme.Light,
+                    "Dark" => ElementTheme.Dark,
+                    _ => ElementTheme.Default
+                };
+                if (Content is FrameworkElement root)
+                    root.RequestedTheme = elementTheme;
+                AppLogger.Info($"Theme applied: {theme}");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"ApplyTheme failed for {theme}", ex);
+            }
+        }
+
+        private void ApplyBackdrop(string backdrop)
+        {
+            try
+            {
+                SystemBackdrop = backdrop switch
+                {
+                    "Mica" => new MicaBackdrop { Kind = MicaKind.Base },
+                    "MicaAlt" => new MicaBackdrop { Kind = MicaKind.BaseAlt },
+                    "Transparent" => new DesktopAcrylicBackdrop(),
+                    _ => new MicaBackdrop { Kind = MicaKind.BaseAlt }
+                };
+                AppLogger.Info($"Backdrop applied: {backdrop}");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"ApplyBackdrop failed for {backdrop}", ex);
+            }
+        }
+
+        private void SaveSetting(string key, string value)
+        {
+            try
+            {
+                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                localSettings.Values[$"charmap_{key}"] = value;
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"SaveSetting failed for {key}", ex);
+            }
+        }
+
+        private string GetSetting(string key, string defaultValue)
+        {
+            try
+            {
+                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                if (localSettings.Values.TryGetValue($"charmap_{key}", out var value) && value is string s)
+                    return s;
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"GetSetting failed for {key}", ex);
+            }
+            return defaultValue;
         }
 
         private void LoadFonts()
@@ -576,6 +645,65 @@ namespace charmap
             }
         }
 
+        internal void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var currentTheme = GetSetting("Theme", "Auto");
+                var currentBackdrop = GetSetting("Backdrop", "MicaAlt");
+
+                var themeCombo = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
+                themeCombo.Items.Add(GetString("ThemeAuto", "Auto"));
+                themeCombo.Items.Add(GetString("ThemeLight", "Jasny"));
+                themeCombo.Items.Add(GetString("ThemeDark", "Ciemny"));
+                themeCombo.SelectedIndex = currentTheme switch { "Light" => 1, "Dark" => 2, _ => 0 };
+
+                var backdropCombo = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
+                backdropCombo.Items.Add(GetString("BackdropMica", "Mica"));
+                backdropCombo.Items.Add(GetString("BackdropMicaAlt", "Mica Alt"));
+                backdropCombo.Items.Add(GetString("BackdropTransparent", "Przezroczysty"));
+                backdropCombo.SelectedIndex = currentBackdrop switch { "Mica" => 0, "Transparent" => 2, _ => 1 };
+
+                var settingsPanel = new StackPanel { Spacing = 12 };
+                settingsPanel.Children.Add(new TextBlock { Text = GetString("ThemeLabel", "Motyw:"), FontWeight = Microsoft.UI.Text.FontWeights.SemiBold });
+                settingsPanel.Children.Add(themeCombo);
+                settingsPanel.Children.Add(new TextBlock { Text = GetString("BackdropLabel", "Tło:"), FontWeight = Microsoft.UI.Text.FontWeights.SemiBold });
+                settingsPanel.Children.Add(backdropCombo);
+
+                var aboutPanel = new StackPanel { Spacing = 8, Margin = new Thickness(0, 16, 0, 0) };
+                aboutPanel.Children.Add(new TextBlock { Text = GetString("AboutAppName", "Tablica znak\u00F3w"), FontSize = 16, FontWeight = Microsoft.UI.Text.FontWeights.SemiBold });
+                aboutPanel.Children.Add(new TextBlock { Text = GetString("AboutAuthor", "Autor: Dekrate") });
+                aboutPanel.Children.Add(new HyperlinkButton { Content = "github.com/Dekrate/charmap", NavigateUri = new Uri("https://github.com/Dekrate/charmap") });
+                settingsPanel.Children.Add(aboutPanel);
+
+                var dialog = new ContentDialog
+                {
+                    Title = GetString("SettingsTitle", "Ustawienia"),
+                    Content = settingsPanel,
+                    PrimaryButtonText = GetString("CloseButton", "Zamknij"),
+                    XamlRoot = this.Content.XamlRoot
+                };
+
+                dialog.PrimaryButtonClick += (_, _) =>
+                {
+                    var theme = themeCombo.SelectedIndex switch { 1 => "Light", 2 => "Dark", _ => "Auto" };
+                    var backdrop = backdropCombo.SelectedIndex switch { 0 => "Mica", 2 => "Transparent", _ => "MicaAlt" };
+                    SaveSetting("Theme", theme);
+                    SaveSetting("Backdrop", backdrop);
+                    ApplyTheme(theme);
+                    ApplyBackdrop(backdrop);
+                    AppLogger.Info($"Settings saved: Theme={theme}, Backdrop={backdrop}");
+                };
+
+                _ = dialog.ShowAsync();
+                AppLogger.Info("Settings dialog opened");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error("SettingsButton_Click failed", ex);
+            }
+        }
+
         internal void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -601,6 +729,7 @@ namespace charmap
             try
             {
                 FontLabel.Text = GetString("FontLabel", "Czcionka:");
+                SettingsButton.Content = GetString("SettingsButton", "Ustawienia");
                 AboutButton.Content = GetString("AboutButton", "O programie");
                 HelpButton.Content = GetString("HelpButton", "Pomoc");
                 CopyLabel.Text = GetString("CopyLabel", "Znaki do skopiowania:");

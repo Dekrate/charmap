@@ -36,11 +36,12 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Top bar: Font selector + About + Help -->
+            <!-- Top bar: Font selector + Settings + About + Help -->
             <Grid Grid.Row="0" Margin="0,0,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
@@ -52,13 +53,18 @@
                           VerticalAlignment="Center"
                           HorizontalAlignment="Stretch"
                           SelectedIndex="0"/>
-                <Button x:Name="AboutButton" x:FieldModifier="public"
+                <Button x:Name="SettingsButton" x:FieldModifier="public"
                         Grid.Column="2"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        Click="SettingsButton_Click"/>
+                <Button x:Name="AboutButton" x:FieldModifier="public"
+                        Grid.Column="3"
                         Margin="8,0,0,0"
                         VerticalAlignment="Center"
                         Click="AboutButton_Click"/>
                 <Button x:Name="HelpButton" x:FieldModifier="public"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Margin="8,0,0,0"
                         VerticalAlignment="Center"
                         Click="HelpButton_Click"/>
