@@ -33,6 +33,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Top bar: Font selector + Help -->
@@ -59,32 +60,28 @@
 
             <!-- Character Grid -->
             <ScrollViewer Grid.Row="1"
-                          HorizontalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto"
                           Margin="0,0,0,8">
-                <GridView x:Name="CharacterGridView" x:FieldModifier="public"
-                          SelectionMode="None"
-                          IsItemClickEnabled="True"
-                          ItemClick="CharacterGridView_ItemClick">
-                    <GridView.ItemTemplate>
+                <ItemsRepeater x:Name="CharacterGridView" x:FieldModifier="public">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout Orientation="Horizontal"
+                                           MinItemWidth="40"
+                                           MinItemHeight="40"
+                                           ItemsStretch="Fill"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="local:CharacterItem">
                             <Button Content="{x:Bind Character}"
                                     FontSize="18"
-                                    Padding="4"
-                                    Width="36"
-                                    Height="36"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
+                                    FontFamily="{x:Bind FontFamily}"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Click="CharacterButton_Click"
                                     Tag="{x:Bind}"/>
                         </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal"
-                                           MaximumRowsOrColumns="32"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                </GridView>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
             </ScrollViewer>
 
             <!-- Copy section -->

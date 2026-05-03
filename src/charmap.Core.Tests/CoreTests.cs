@@ -19,7 +19,7 @@ namespace charmap.Core.Tests
         public static void ClassInit(TestContext ctx)
         {
             var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
-            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", "..", ".."));
+            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."));
         }
 
         [TestMethod]
@@ -199,7 +199,7 @@ namespace charmap.Core.Tests
         public static void ClassInit(TestContext ctx)
         {
             var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
-            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", "..", ".."));
+            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."));
             _xamlContent = File.ReadAllText(Path.Combine(_solutionDir, "charmap", "MainWindow.xaml"));
             _csContent = File.ReadAllText(Path.Combine(_solutionDir, "charmap", "MainWindow.xaml.cs"));
         }
@@ -351,7 +351,7 @@ namespace charmap.Core.Tests
         public static void ClassInit(TestContext ctx)
         {
             var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
-            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", "..", ".."));
+            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."));
             _xamlContent = File.ReadAllText(Path.Combine(_solutionDir, "charmap", "MainWindow.xaml"));
         }
 
@@ -408,7 +408,7 @@ namespace charmap.Core.Tests
         public static void ClassInit(TestContext ctx)
         {
             var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
-            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", "..", ".."));
+            _solutionDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."));
             _csFiles = Directory.GetFiles(Path.Combine(_solutionDir, "charmap"), "*.cs", SearchOption.AllDirectories)
                                 .Where(f => !f.Contains("\\obj\\"))
                                 .ToList();

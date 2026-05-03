@@ -7,6 +7,7 @@ using Microsoft.UI.Composition.SystemBackdrops;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Windows.ApplicationModel.DataTransfer;
@@ -18,6 +19,7 @@ namespace charmap
         private ObservableCollection<CharacterItem> _characters = new();
         private ObservableCollection<CharacterItem> _allCharacters = new();
         private List<string> _fontFamilies = new();
+        private string _currentFontFamily = "Arial";
 
         public MainWindow()
         {
@@ -90,6 +92,7 @@ namespace charmap
 
                 FontComboBox.ItemsSource = _fontFamilies;
                 FontComboBox.SelectedItem = _fontFamilies.Contains("Arial") ? "Arial" : _fontFamilies.First();
+                _currentFontFamily = FontComboBox.SelectedItem as string ?? "Arial";
                 FontComboBox.SelectionChanged += FontComboBox_SelectionChanged;
                 AppLogger.Info($"Loaded {_fontFamilies.Count} fonts");
             }
@@ -109,7 +112,13 @@ namespace charmap
             {
                 if (FontComboBox.SelectedItem is string fontName)
                 {
-                    CharacterGridView.FontFamily = new FontFamily(fontName);
+                    _currentFontFamily = fontName;
+
+                    foreach (var c in _allCharacters)
+                        c.FontFamily = fontName;
+                    foreach (var c in _characters)
+                        c.FontFamily = fontName;
+
                     AppLogger.Info($"Font changed to: {fontName}");
                 }
             }
@@ -234,7 +243,8 @@ namespace charmap
                             var item = new CharacterItem
                             {
                                 Character = char.ConvertFromUtf32(i),
-                                CodePoint = i
+                                CodePoint = i,
+                                FontFamily = _currentFontFamily
                             };
                             _characters.Add(item);
                             _allCharacters.Add(item);
@@ -283,7 +293,7 @@ namespace charmap
                         if (ch.Length > 0 && ch[0] != '\0')
                         {
                             int cp = char.ConvertToUtf32(ch, 0);
-                            var item = new CharacterItem { Character = ch, CodePoint = cp };
+                            var item = new CharacterItem { Character = ch, CodePoint = cp, FontFamily = _currentFontFamily };
                             _characters.Add(item);
                             _allCharacters.Add(item);
                             count++;
@@ -304,11 +314,11 @@ namespace charmap
             }
         }
 
-        private void CharacterGridView_ItemClick(object sender, ItemClickEventArgs e)
+        private void CharacterButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (e.ClickedItem is CharacterItem item)
+                if (sender is Button btn && btn.Tag is CharacterItem item)
                 {
                     CopyTextBox.Text += item.Character;
                     UpdateSelectedCharacterInfo(item);
@@ -317,7 +327,7 @@ namespace charmap
             }
             catch (Exception ex)
             {
-                AppLogger.Error("CharacterGridView_ItemClick failed", ex);
+                AppLogger.Error("CharacterButton_Click failed", ex);
             }
         }
 
@@ -445,9 +455,15 @@ namespace charmap
                 var item = _characters.FirstOrDefault(c => c.CodePoint == codePoint);
                 if (item != null)
                 {
-                    CharacterGridView.ScrollIntoView(item);
-                    UpdateSelectedCharacterInfo(item);
-                    AppLogger.Info($"Scrolled to U+{codePoint:X4}");
+                    var index = _characters.IndexOf(item);
+                    if (index >= 0)
+                    {
+                        var element = CharacterGridView.GetOrCreateElement(index);
+                        element.UpdateLayout();
+                        element.StartBringIntoView();
+                        UpdateSelectedCharacterInfo(item);
+                        AppLogger.Info($"Scrolled to U+{codePoint:X4}");
+                    }
                 }
                 else
                 {

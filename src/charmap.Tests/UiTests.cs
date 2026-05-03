@@ -3,6 +3,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Composition.SystemBackdrops;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
 using charmap;
@@ -52,7 +54,8 @@ namespace charmap.Tests
         [TestMethod]
         public void CharacterGridView_HasItems()
         {
-            Assert.IsTrue(_window.CharacterGridView.Items.Count > 0, "Character grid should contain characters");
+            var items = _window.CharacterGridView.ItemsSource as IList;
+            Assert.IsTrue(items != null && items.Count > 0, "Character grid should contain characters");
         }
 
         [TestMethod]
@@ -154,7 +157,8 @@ namespace charmap.Tests
         [TestMethod]
         public void ClickCharacter_AddsToCopyBox()
         {
-            var firstItem = _window.CharacterGridView.Items.FirstOrDefault() as CharacterItem;
+            var itemsList = _window.CharacterGridView.ItemsSource as IList;
+            var firstItem = itemsList?.Cast<object>().FirstOrDefault() as CharacterItem;
             Assert.IsNotNull(firstItem, "Grid should have at least one item");
 
             _window.CopyTextBox.Text = "";
@@ -218,7 +222,7 @@ namespace charmap.Tests
         public void ClickMultipleCharacters_AccumulatesText()
         {
             _window.CopyTextBox.Text = "";
-            var items = _window.CharacterGridView.Items.Take(3).Cast<CharacterItem>().ToList();
+            var items = (_window.CharacterGridView.ItemsSource as IList)?.Cast<CharacterItem>().Take(3).ToList() ?? new();
             Assert.AreEqual(3, items.Count, "Need at least 3 items in grid");
 
             foreach (var item in items)
@@ -251,7 +255,7 @@ namespace charmap.Tests
         public void Grid_ContainsPolishCharacters()
         {
             var polishChars = new[] { "\u0105", "\u0107", "\u0119", "\u0142", "\u0144", "\u00F3", "\u015B", "\u017A", "\u017C" };
-            var gridChars = _window.CharacterGridView.Items.Cast<CharacterItem>().Select(c => c.Character).ToHashSet();
+            var gridChars = (_window.CharacterGridView.ItemsSource as IList)?.Cast<CharacterItem>().Select(c => c.Character).ToHashSet() ?? new HashSet<string>();
             foreach (var c in polishChars)
             {
                 Assert.IsTrue(gridChars.Contains(c), $"Grid should contain Polish character {c}");
@@ -262,7 +266,7 @@ namespace charmap.Tests
         public void Grid_ContainsBasicLatin()
         {
             var expected = new[] { "A", "z", "0", "9" };
-            var gridChars = _window.CharacterGridView.Items.Cast<CharacterItem>().Select(c => c.Character).ToHashSet();
+            var gridChars = (_window.CharacterGridView.ItemsSource as IList)?.Cast<CharacterItem>().Select(c => c.Character).ToHashSet() ?? new HashSet<string>();
             foreach (var c in expected)
             {
                 Assert.IsTrue(gridChars.Contains(c), $"Grid should contain basic latin {c}");
@@ -273,7 +277,7 @@ namespace charmap.Tests
         public void Grid_ContainsCurrencySymbols()
         {
             var expected = new[] { "\u20AC", "\u00A3", "\u00A5" }; // Euro, Pound, Yen
-            var gridChars = _window.CharacterGridView.Items.Cast<CharacterItem>().Select(c => c.Character).ToHashSet();
+            var gridChars = (_window.CharacterGridView.ItemsSource as IList)?.Cast<CharacterItem>().Select(c => c.Character).ToHashSet() ?? new HashSet<string>();
             foreach (var c in expected)
             {
                 Assert.IsTrue(gridChars.Contains(c), $"Grid should contain currency symbol {c}");
@@ -284,7 +288,7 @@ namespace charmap.Tests
         public void Grid_ContainsMathematicalOperators()
         {
             var expected = new[] { "\u2200", "\u2202" }; // For-all, Partial differential
-            var gridChars = _window.CharacterGridView.Items.Cast<CharacterItem>().Select(c => c.Character).ToHashSet();
+            var gridChars = (_window.CharacterGridView.ItemsSource as IList)?.Cast<CharacterItem>().Select(c => c.Character).ToHashSet() ?? new HashSet<string>();
             foreach (var c in expected)
             {
                 Assert.IsTrue(gridChars.Contains(c), $"Grid should contain math operator {c}");
@@ -338,15 +342,9 @@ namespace charmap.Tests
         }
 
         [TestMethod]
-        public void CharacterGridView_SelectionMode_IsNone()
+        public void CharacterGridView_ItemsSource_IsNotNull()
         {
-            Assert.AreEqual(ListViewSelectionMode.None, _window.CharacterGridView.SelectionMode, "Grid should use ItemClick, not selection");
-        }
-
-        [TestMethod]
-        public void CharacterGridView_IsItemClickEnabled_IsTrue()
-        {
-            Assert.IsTrue(_window.CharacterGridView.IsItemClickEnabled, "ItemClick should be enabled");
+            Assert.IsNotNull(_window.CharacterGridView.ItemsSource, "ItemsRepeater should have ItemsSource");
         }
 
         [TestMethod]
