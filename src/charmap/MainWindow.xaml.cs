@@ -119,6 +119,10 @@ namespace charmap
                     foreach (var c in _characters)
                         c.FontFamily = fontName;
 
+                    // Force ItemsRepeater to recreate elements with new font
+                    CharacterGridView.ItemsSource = null;
+                    CharacterGridView.ItemsSource = _characters;
+
                     AppLogger.Info($"Font changed to: {fontName}");
                 }
             }

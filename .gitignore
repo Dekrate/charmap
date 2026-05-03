@@ -25,3 +25,24 @@ desktop.ini
 
 # Test results
 TestResults/
+
+# WinUI / Windows App SDK
+*.pri
+*.pfx
+*.appx
+*.msix
+*.appxbundle
+*.msixbundle
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+
+# Generated files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Temporary files
+*.tmp
+*.temp
